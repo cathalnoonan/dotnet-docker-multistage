@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Cathal.Multistage.Core/Cathal.Multistage.Core.csproj" />
+    <Project Path="src/Cathal.Multistage.Service/Cathal.Multistage.Service.csproj" />
+    <Project Path="src/Cathal.Multistage.Web/Cathal.Multistage.Web.csproj" />
+  </Folder>
+</Solution>

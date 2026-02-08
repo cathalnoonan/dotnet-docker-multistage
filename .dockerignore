@@ -1,0 +1,13 @@
+.git/
+.github/
+.vs/
+.vscode/
+
+**/bin/
+**/dist/
+**/obj/
+
+.dockerignore
+.editorconfig
+.gitignore
+Dockerfile

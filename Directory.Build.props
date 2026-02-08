@@ -1,0 +1,8 @@
+<Project>
+  <!-- Publish properties -->
+  <PropertyGroup>
+    <RuntimeIdentifiers Condition=" '$(RuntimeIdentifiers)' == '' ">linux-x64;linux-arm64</RuntimeIdentifiers>
+    <PublishDirectoryRoot Condition=" '$(PublishDirectoryRoot)' == '' ">$(MSBuildProjectDirectory)\bin\publish</PublishDirectoryRoot>
+    <PublishDir>$(PublishDirectoryRoot)\$(MSBuildProjectName)</PublishDir>
+  </PropertyGroup>
+</Project>
