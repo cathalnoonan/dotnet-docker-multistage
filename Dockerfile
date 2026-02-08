@@ -1,7 +1,7 @@
 ARG Version=0.0.0
-ARG TARGETARCH=linux-arm64
+ARG TARGETARCH
 
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG Version
 ARG TARGETARCH
 ENV Version=${Version}
@@ -13,7 +13,12 @@ COPY --parents ./*.slnx .
 COPY --parents ./src/**/*.csproj .
 RUN dotnet restore
 COPY . .
-RUN dotnet publish --no-restore -c Release --self-contained --runtime ${TARGETARCH} -p:PublishDirectoryRoot=/dist
+RUN dotnet publish \
+  --no-restore \
+  -c Release \
+  --self-contained \
+  --runtime linux-$( [ "$TARGETARCH" = "amd64" ] && echo x64 || echo arm64 ) \
+  -p:PublishDirectoryRoot=/dist
 
 
 FROM mcr.microsoft.com/dotnet/runtime:10.0 AS service
