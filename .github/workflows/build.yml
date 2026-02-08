@@ -28,7 +28,7 @@ jobs:
           context: .
           target: service
           tags: cathal-dotnet-docker-multistage/service:latest
-          platforms: linux-amd64,linux-arm64
+          platforms: linux/amd64,linux/arm64
       - name: Build web
         uses: docker/build-push-action@v6
         with:
@@ -36,4 +36,4 @@ jobs:
           context: .
           target: web
           tags: cathal-dotnet-docker-multistage/web:latest
-          platforms: linux-amd64,linux-arm64
+          platforms: linux/amd64,linux/arm64
