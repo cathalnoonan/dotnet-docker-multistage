@@ -3,7 +3,6 @@ ARG TARGETARCH
 
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG Version
-ARG TARGETARCH
 ENV Version=${Version}
 WORKDIR /app/
 COPY --parents ./**.props .
@@ -16,8 +15,6 @@ COPY . .
 RUN dotnet publish \
   --no-restore \
   -c Release \
-  --self-contained \
-  --runtime linux-$( [ "$TARGETARCH" = "amd64" ] && echo x64 || echo arm64 ) \
   -p:PublishDirectoryRoot=/dist
 
 
