@@ -1,5 +1,4 @@
 ARG Version=0.0.0
-ARG TARGETARCH
 
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG Version
