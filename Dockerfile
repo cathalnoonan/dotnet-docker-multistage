@@ -15,15 +15,15 @@ RUN dotnet publish \
   -p:PublishDirectoryRoot=/dist
 
 
-FROM mcr.microsoft.com/dotnet/runtime:10.0 AS service
+FROM mcr.microsoft.com/dotnet/runtime:10.0-alpine AS service
 USER app
 WORKDIR /app
 COPY --from=build --chown=app:app /dist/Cathal.Multistage.Service .
-CMD [ "./Cathal.Multistage.Service" ]
+CMD [ "dotnet", "./Cathal.Multistage.Service.dll" ]
 
 
-FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS web
+FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine AS web
 USER app
 WORKDIR /app
 COPY --from=build --chown=app:app /dist/Cathal.Multistage.Web .
-CMD [ "./Cathal.Multistage.Web" ]
+CMD [ "dotnet", "./Cathal.Multistage.Web.dll" ]
