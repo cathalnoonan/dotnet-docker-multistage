@@ -6,7 +6,7 @@ ENV Version=${Version}
 WORKDIR /app/
 COPY --parents ./**.props ./**.targets ./
 COPY --parents ./**.sln ./**.slnx ./
-COPY --parents ./**.csproj ./
+COPY --parents ./*/*.csproj ./*/*/*.csproj ./*/*/*/*.csproj ./
 RUN dotnet restore
 COPY . .
 RUN dotnet publish \
