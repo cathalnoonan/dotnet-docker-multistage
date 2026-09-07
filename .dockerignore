@@ -1,5 +1,6 @@
 .git/
 .github/
+.idea/
 .vs/
 .vscode/
 
@@ -7,8 +8,9 @@
 **/dist/
 **/obj/
 
-.DS_Store
+**/.DS_Store
 .dockerignore
 .editorconfig
 .gitignore
 Dockerfile
+README.md
