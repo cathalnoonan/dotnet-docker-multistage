@@ -47,14 +47,20 @@ jobs:
       - name: Build service
         shell: bash
         run: |
+          podman manifest rm cathal-dotnet-podman-multistage/service:latest 2>/dev/null || true
+          podman manifest create cathal-dotnet-podman-multistage/service:latest
           podman build \
             --platform linux/amd64,linux/arm64 \
+            --manifest cathal-dotnet-podman-multistage/service:latest \
             --target service \
-            -t cathal-dotnet-podman-multistage/service:latest .
+            .
       - name: Build web
         shell: bash
         run: |
+          podman manifest rm cathal-dotnet-podman-multistage/web:latest 2>/dev/null || true
+          podman manifest create cathal-dotnet-podman-multistage/web:latest
           podman build \
             --platform linux/amd64,linux/arm64 \
+            --manifest cathal-dotnet-podman-multistage/web:latest \
             --target web \
-            -t cathal-dotnet-podman-multistage/web:latest .
+            .

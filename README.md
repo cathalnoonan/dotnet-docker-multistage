@@ -52,14 +52,32 @@ or
 podman build --target web -t cathal-multistage-web:latest .
 ```
 
+---
+
 #### Multi-Architecture Build (AMD64 & ARM64)
 
+Docker's default `docker` driver uses a classic storage driver which does not support multi-platform manifest lists locally without pushing to a registry. This leaves two options:
+
+1. Build an OCI tarball
+1. Use the containerd image store instead of the default
+
+Neither of these options are particularly clean for demonstration purposes.
+
 ```bash
+# (re)Create and use a multi-architecture builder instance
+docker buildx create --name multiarch-builder --driver docker-container --use 2>/dev/null || docker buildx use multiarch-builder
+
+# Build multi-architecture image
 docker buildx build --platform linux/amd64,linux/arm64 --target service -t cathal-multistage-service:latest .
 ```
 
-or
+Podman supports local manifest lists within it's image store. This requires creating a manifest first.
 
 ```bash
-podman build --platform linux/amd64,linux/arm64 --target service -t cathal-multistage-service:latest .
+# (re)Create manifest
+podman manifest rm cathal-multistage-service:latest 2>/dev/null || true
+podman manifest create cathal-multistage-service:latest
+
+# Build directly into manifest
+podman build --platform linux/amd64,linux/arm64 --manifest cathal-multistage-service:latest --target service .
 ```
