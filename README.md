@@ -61,5 +61,10 @@ docker buildx build --platform linux/amd64,linux/arm64 --target service -t catha
 or
 
 ```bash
-podman build --platform linux/amd64,linux/arm64 --target service -t cathal-multistage-service:latest .
+# (re)Create manifest
+podman manifest rm cathal-multistage-service:latest 2>/dev/null || true
+podman manifest create cathal-multistage-service:latest
+
+# Build directly into manifest
+podman build --platform linux/amd64,linux/arm64 --manifest cathal-multistage-service:latest --target service .
 ```
