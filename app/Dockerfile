@@ -1,6 +1,6 @@
 ARG Version=0.0.0
 
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0.401-alpine3.24 AS build
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0.402-alpine3.24 AS build
 ARG Version
 ENV Version=${Version}
 WORKDIR /app/
