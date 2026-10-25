@@ -22,7 +22,7 @@ COPY --from=build --chown=app:app /dist/Cathal.Multistage.Service .
 CMD [ "dotnet", "./Cathal.Multistage.Service.dll" ]
 
 
-FROM mcr.microsoft.com/dotnet/aspnet:10.0.12-alpine3.24 AS web
+FROM mcr.microsoft.com/dotnet/aspnet:10.0.13-alpine3.24 AS web
 USER app
 WORKDIR /app
 COPY --from=build --chown=app:app /dist/Cathal.Multistage.Web .
