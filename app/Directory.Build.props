@@ -1,6 +1,10 @@
 <Project>
   <PropertyGroup>
-    <!-- Allow the Dockerfile build to produce project specific folders from a solution-level "dotnet publish" -->
-    <PublishDir Condition=" '$(DOTNET_RUNNING_IN_CONTAINER)' == 'true' ">/dist/$(MSBuildProjectName)</PublishDir>
+    <IsPublishable>false</IsPublishable>
+  </PropertyGroup>
+
+  <!-- Allow the Dockerfile build to produce project specific folders from a solution-level "dotnet publish" -->
+  <PropertyGroup Condition=" '$(DOTNET_RUNNING_IN_CONTAINER)' == 'true' ">
+    <PublishDir>/dist/$(MSBuildProjectName)</PublishDir>
   </PropertyGroup>
 </Project>

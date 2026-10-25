@@ -11,8 +11,7 @@ RUN dotnet restore
 COPY . .
 RUN dotnet publish \
   --no-restore \
-  -c Release \
-  -p:PublishDirectoryRoot=/dist
+  -c Release
 
 
 FROM mcr.microsoft.com/dotnet/runtime:10.0.13-alpine3.24 AS service
