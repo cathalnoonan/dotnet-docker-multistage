@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-dotnet@v6
       - shell: bash
         run: |
-          dotnet test
+          dotnet test app
 
   docker-build:
     runs-on: 'ubuntu-latest'
@@ -25,7 +25,7 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           push: false
-          context: .
+          context: app
           target: service
           tags: cathal-dotnet-docker-multistage/service:latest
           platforms: linux/amd64,linux/arm64
@@ -33,7 +33,7 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           push: false
-          context: .
+          context: app
           target: web
           tags: cathal-dotnet-docker-multistage/web:latest
           platforms: linux/amd64,linux/arm64
@@ -46,6 +46,7 @@ jobs:
         uses: docker/setup-qemu-action@v4
       - name: Build service
         shell: bash
+        working-directory: app
         run: |
           podman manifest rm cathal-dotnet-podman-multistage/service:latest 2>/dev/null || true
           podman manifest create cathal-dotnet-podman-multistage/service:latest
@@ -56,6 +57,7 @@ jobs:
             .
       - name: Build web
         shell: bash
+        working-directory: app
         run: |
           podman manifest rm cathal-dotnet-podman-multistage/web:latest 2>/dev/null || true
           podman manifest create cathal-dotnet-podman-multistage/web:latest

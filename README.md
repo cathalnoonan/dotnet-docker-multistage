@@ -28,6 +28,8 @@ You can build specific target images using either **Docker** or **Podman**.
 
 ### Building
 
+Run the following commands within the `app/` folder.
+
 #### Build `service` target
 
 ```bash
