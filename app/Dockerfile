@@ -15,7 +15,7 @@ RUN dotnet publish \
   -p:PublishDirectoryRoot=/dist
 
 
-FROM mcr.microsoft.com/dotnet/runtime:10.0.12-alpine3.24 AS service
+FROM mcr.microsoft.com/dotnet/runtime:10.0.13-alpine3.24 AS service
 USER app
 WORKDIR /app
 COPY --from=build --chown=app:app /dist/Cathal.Multistage.Service .
