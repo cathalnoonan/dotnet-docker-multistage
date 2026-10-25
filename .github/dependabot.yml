@@ -10,12 +10,12 @@ updates:
     groups:
       dotnet-docker:
         patterns:
-          - "mcr.microsoft.com/dotnet/*"
+          - "dotnet/*"
         update-types:
           - "minor"
           - "patch"
     ignore:
-      - dependency-name: "mcr.microsoft.com/dotnet/*"
+      - dependency-name: "dotnet/*"
         update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
